@@ -1,0 +1,26 @@
+# global parameters
+project_name: 'cc_process'
+dataset_path: '/mnt/raw_data/LLaVA-CC3M-Pretrain-595K/metadata.json'  # path to your dataset directory or file
+export_path: '/mnt/outputs/process/cc/data.jsonl'
+
+np: 4  # number of subprocess to process your dataset
+text_keys: 'id'    
+text_keys: 'image' 
+text_keys: 'caption'    
+text_keys: 'blip_caption' 
+text_keys: 'url'    
+
+open_tracer: false
+use_checkpoint: true   
+use_cache: true                                             # whether to use the cache management of Hugging Face datasets. It might take up lots of disk space when using cache
+ds_cache_dir: '/mnt/datajucier_cache/huggingface/datasets'                                          # cache dir for Hugging Face datasets. In default, it\'s the same as the environment variable `HF_DATASETS_CACHE`, whose default value is usually "~/.cache/huggingface/datasets". If this argument is set to a valid path by users, it will override the default cache dir
+
+# process schedule
+# a list of several process operators with their arguments
+process:
+  - clean_email_mapper:
+  - clean_links_mapper:
+  - fix_unicode_mapper:
+  - punctuation_normalization_mapper:
+  - whitespace_normalization_mapper:
+
